@@ -11,7 +11,7 @@ Web Terminal
 - Download (command: download file.php)
 
 ## Preview
-![X-Command Preview](Picsart_24-03-03_15-55-17-497.jpg) 
+![X-Command Preview](Picsart_24-03-03_16-03-18-967.jpg) 
 
 ## Artikel Terkait
 [Artikel X-Command](https://www.msverse.site)
