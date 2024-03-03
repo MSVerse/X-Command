@@ -7,9 +7,11 @@ Web Terminal
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-green.svg)
 
 Malware Scanning Log
-
+-------
+![Malware Scanning Log](Picsart_24-03-03_20-58-46-181.jpg) 
 
 HTTP Header Check
+-------
 ```
 HTTP/1.1 404 Not Found
 Connection: Keep-Alive
