@@ -6,7 +6,8 @@ Web Terminal
 ![Language: PHP](https://img.shields.io/badge/Language-PHP-blue.svg)
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-green.svg)
 
-Anti Malware Scanning Log
+Malware Scanning Log
+
 
 HTTP Header Check
 ```
